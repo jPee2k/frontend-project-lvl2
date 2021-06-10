@@ -52,7 +52,7 @@ export const printResult = (coll) => {
   const tab = '  ';
   const text = coll.join(`\n${tab}`);
 
-  console.log(`{\n${tab}${text}\n}`);
+  console.log(`\n{\n${tab}${text}\n}`);
 };
 
 export const compareData = (filepath1, filepath2) => {
