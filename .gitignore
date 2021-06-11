@@ -11,3 +11,6 @@ npm-debug.*
 Thumbs.db
 __MACOSX
 .DS_Store
+
+cc-test-reporter
+coverage
