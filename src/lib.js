@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
 
-const getFileData = (filepath) => {
+export const getFileData = (filepath) => {
   const fullPath = path.resolve(process.cwd(), filepath);
 
   try {
@@ -16,7 +16,7 @@ const getFileData = (filepath) => {
   return {};
 };
 
-const getIntersectionData = (data1, data2) => {
+ export const getIntersectionData = (data1, data2) => {
   const keyIntersections = _.intersection(Object.keys(data1), Object.keys(data2));
 
   return keyIntersections.flatMap((key) => {
@@ -31,24 +31,28 @@ const getIntersectionData = (data1, data2) => {
   });
 };
 
-const getRemovedData = (data1, data2) => {
+export const getRemovedData = (data1, data2) => {
   const keyDifferences = _.difference(Object.keys(data1), Object.keys(data2));
 
   return keyDifferences
     .map((key) => ({ prefix: '-', key, value: data1[key] }));
 };
 
-const getAddedData = (data1, data2) => {
+export const getAddedData = (data1, data2) => {
   const keyDifferences = _.difference(Object.keys(data2), Object.keys(data1));
 
   return keyDifferences
     .map((key) => ({ prefix: '+', key, value: data2[key] }));
 };
 
-const generateResult = (coll) => coll
+export const generateResult = (coll) => coll
   .map((item) => `${item?.prefix} ${item?.key}: ${item?.value}`);
 
 export const printResult = (coll) => {
+  if (coll.length === 0) {
+    return;
+  }
+
   const tab = '  ';
   const text = coll.join(`\n${tab}`);
 
@@ -59,7 +63,7 @@ export const compareData = (filepath1, filepath2) => {
   const data1 = getFileData(filepath1);
   const data2 = getFileData(filepath2);
 
-  if (_.isEqual(data1, data2)) {
+  if (_.isEqual(data1, data2) || _.isEmpty(data1) || _.isEmpty(data2)) {
     return [];
   }
 
