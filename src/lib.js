@@ -16,7 +16,7 @@ export const getFileData = (filepath) => {
   return {};
 };
 
- export const getIntersectionData = (data1, data2) => {
+export const getIntersectionData = (data1, data2) => {
   const keyIntersections = _.intersection(Object.keys(data1), Object.keys(data2));
 
   return keyIntersections.flatMap((key) => {

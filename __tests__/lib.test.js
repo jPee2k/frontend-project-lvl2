@@ -1,5 +1,5 @@
 import path from 'path';
-import {getFileData} from '../src/lib.js';
+import { getFileData } from '../src/lib.js';
 
 let pathToFiles;
 
@@ -21,14 +21,14 @@ describe('-----> open & read the contents of JSON files', () => {
       host: 'hexlet.io',
       timeout: 50,
       proxy: '123.234.53.22',
-      follow: false
+      follow: false,
     };
     expect(getFileData(filepathToJson1)).toEqual(actual1);
 
     const actual2 = {
       timeout: 20,
       verbose: true,
-      host: 'hexlet.io'
+      host: 'hexlet.io',
     };
     expect(actual2).toEqual(getFileData(filepathToJson2));
 

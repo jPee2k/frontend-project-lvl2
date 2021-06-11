@@ -1,4 +1,7 @@
 install:
+	npm i
+
+reinstall:
 	npm ci
 
 test:
