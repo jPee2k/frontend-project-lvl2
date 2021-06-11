@@ -31,18 +31,30 @@ export const getIntersectionData = (data1, data2) => {
   });
 };
 
-export const getRemovedData = (data1, data2) => {
-  const keyDifferences = _.difference(Object.keys(data1), Object.keys(data2));
+export const getEditedData = (data1, data2, flag = 'rm') => {
+  const keys1 = Object.keys(data1);
+  const keys2 = Object.keys(data2);
+
+  let prefix = ' ';
+  let data = {};
+  let keyDifferences = [];
+
+  switch (flag) {
+    case 'rm':
+      prefix = '-';
+      data = data1;
+      keyDifferences = _.difference(keys1, keys2);
+      break;
+    case 'add':
+      prefix = '+';
+      keyDifferences = _.difference(keys2, keys1);
+      data = data2;
+      break;
+    default:
+  }
 
   return keyDifferences
-    .map((key) => ({ prefix: '-', key, value: data1[key] }));
-};
-
-export const getAddedData = (data1, data2) => {
-  const keyDifferences = _.difference(Object.keys(data2), Object.keys(data1));
-
-  return keyDifferences
-    .map((key) => ({ prefix: '+', key, value: data2[key] }));
+    .map((key) => ({ prefix, key, value: data[key] }));
 };
 
 export const generateResult = (coll) => coll
@@ -69,8 +81,8 @@ export const compareData = (filepath1, filepath2) => {
 
   const listOfDifferences = [
     ...getIntersectionData(data1, data2),
-    ...getRemovedData(data1, data2),
-    ...getAddedData(data1, data2),
+    ...getEditedData(data1, data2, 'rm'),
+    ...getEditedData(data1, data2, 'add'),
   ].sort((a, b) => a.key.localeCompare(b.key));
 
   return generateResult(listOfDifferences);
