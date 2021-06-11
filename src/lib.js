@@ -35,7 +35,7 @@ export const getEditedData = (data1, data2, flag = 'rm') => {
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
 
-  let prefix = ' ';
+  let prefix = '';
   let data = {};
   let keyDifferences = [];
 
@@ -51,6 +51,7 @@ export const getEditedData = (data1, data2, flag = 'rm') => {
       data = data2;
       break;
     default:
+      prefix = ' ';
   }
 
   return keyDifferences
@@ -58,7 +59,7 @@ export const getEditedData = (data1, data2, flag = 'rm') => {
 };
 
 export const generateResult = (coll) => coll
-  .map((item) => `${item?.prefix} ${item?.key}: ${item?.value}`);
+  .map((item) => `${item.prefix} ${item.key}: ${item.value}`);
 
 export const printResult = (coll) => {
   if (coll.length === 0) {
