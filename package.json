@@ -25,16 +25,17 @@
   },
   "homepage": "https://github.com/jPee2k/frontend-project-lvl2#readme",
   "devDependencies": {
+    "@jest/globals": "^27.0.1",
     "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.2",
-    "@jest/globals": "^27.0.1",
     "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.1",
+    "jest-circus": "^27.0.4",
     "jest-cli": "^27.0.1"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "commander": "^7.2.0"
+    "commander": "^7.2.0",
+    "lodash": "^4.17.21"
   }
 }
