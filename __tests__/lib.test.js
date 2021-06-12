@@ -1,12 +1,15 @@
+import fs from 'fs';
 import path from 'path';
 import {
-  getFileData, getIntersectionData, getEditedData, generateResult, compareData,
+  getFileContent, getIntersectionData, getEditedData, generateResult, compareData,
 } from '../src/lib.js';
 
 let pathToFiles;
+
 let filepathToJson1;
 let filepathToJson2;
 let filepathToJson3;
+
 let jsonData1;
 let jsonData2;
 
@@ -29,11 +32,16 @@ beforeAll(() => {
   };
 });
 
-test('open & reed data from files', () => {
-  expect(getFileData(pathToFiles)).toEqual({});
-  expect(getFileData(filepathToJson1)).toEqual(jsonData1);
-  expect(getFileData(filepathToJson2)).toEqual(jsonData2);
-  expect(getFileData(filepathToJson1)).not.toEqual(jsonData2);
+test('check content', () => {
+  expect(getFileContent(pathToFiles)).toEqual('');
+
+  const data1 = fs.readFileSync(filepathToJson1, 'utf8').toString();
+  expect(getFileContent(filepathToJson1)).toEqual(data1);
+
+  const data2 = fs.readFileSync(filepathToJson2, 'utf8').toString();
+  expect(getFileContent(filepathToJson2)).toEqual(data2);
+
+  expect(getFileContent(filepathToJson2)).not.toEqual(data1);
 });
 
 test('intersections', () => {

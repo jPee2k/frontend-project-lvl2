@@ -1,20 +1,22 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import { parseContent } from './parsers.js';
 
-export const getFileData = (filepath) => {
+export const getFileContent = (filepath) => {
   const fullPath = path.resolve(process.cwd(), filepath);
 
   try {
     const resource = fs.readFileSync(fullPath, 'utf8');
-    const content = resource.toString();
-    return JSON.parse(content);
-  } catch (err) {
-    console.log(err);
+    return resource.toString();
+  } catch (error) {
+    console.log(error);
   }
 
-  return {};
+  return '';
 };
+
+export const getFileData = (filepath) => parseContent(filepath, getFileContent(filepath));
 
 export const getIntersectionData = (data1, data2) => {
   const keyIntersections = _.intersection(Object.keys(data1), Object.keys(data2));
