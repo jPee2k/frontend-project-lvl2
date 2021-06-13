@@ -6,3 +6,4 @@
 ![lint](https://github.com/jPee2k/frontend-project-lvl2/actions/workflows/lint.yml/badge.svg)
 
 [![asciicast](https://asciinema.org/a/58RVt15ThnU0qysrd24fGNnKi.svg)](https://asciinema.org/a/58RVt15ThnU0qysrd24fGNnKi)
+[![asciicast](https://asciinema.org/a/f3YOPojqA6hKXh0OAeHXzbuFI.svg)](https://asciinema.org/a/f3YOPojqA6hKXh0OAeHXzbuFI)

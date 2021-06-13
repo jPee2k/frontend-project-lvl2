@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 import { Command } from 'commander/esm.mjs';
-import { compareData, printResult } from '../src/lib.js';
+import compareData from '../src/core.js';
+import info from '../src/info.js';
 
 const program = new Command();
 
 program
-  .version('1.0.0', '-V, --version', 'output the version number')
-  .description('Compares two configuration files and shows a difference.')
+  .version(info.version, '-V, --version', 'output the version number')
+  .description(info.description)
   .helpOption('-h, --help', 'output usage information')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format <type>', 'output format')
   .action((filepath1, filepath2) => {
-    const data = compareData(filepath1, filepath2);
-    printResult(data);
+    console.log(compareData(filepath1, filepath2));
   });
 
 program.parse();

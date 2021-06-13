@@ -3,10 +3,11 @@ import yaml from 'js-yaml';
 import { getCurrentParser, parseContent } from '../src/parsers.js';
 import { getFileContent } from '../src/lib.js';
 
-let pathToFiles;
-let filepathToJson;
-let filepathToYaml;
-let filepathToYml;
+const pathToFiles = path.resolve(process.cwd(), '__tests__/__fixtures__');
+
+const filepathToYml = path.resolve(pathToFiles, 'yaml/file3.yml');
+const filepathToYaml = path.resolve(pathToFiles, 'yaml/file2.yaml');
+const filepathToJson = path.resolve(pathToFiles, 'json/file1.json');
 
 let jsonData;
 let ymlData;
@@ -14,11 +15,6 @@ let ymlData;
 let parser;
 
 beforeAll(() => {
-  pathToFiles = path.resolve(process.cwd(), '__tests__/__fixtures__');
-  filepathToJson = path.resolve(pathToFiles, 'json/file1.json');
-  filepathToYaml = path.resolve(pathToFiles, 'yaml/file2.yaml');
-  filepathToYml = path.resolve(pathToFiles, 'yaml/file3.yml');
-
   jsonData = {
     host: 'hexlet.io',
     timeout: 50,
