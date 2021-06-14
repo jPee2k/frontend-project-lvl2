@@ -13,6 +13,10 @@ insert_final_newline = true
 [*.{go,py,rb,php}]
 indent_size = 4
 
+[*.txt]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
 [*.md]
 trim_trailing_whitespace = false
 
