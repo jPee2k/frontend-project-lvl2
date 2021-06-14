@@ -23,5 +23,5 @@ export const parseContent = (filepath, content) => {
     console.log(error);
   }
 
-  return {};
+  throw new Error('parser crushed');
 };
