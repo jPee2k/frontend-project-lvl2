@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander/esm.mjs';
 import { info } from '../src/lib.js';
-import compareData from '../src/core.js';
+import compareData from '../src/index.js';
 
 const program = new Command();
 

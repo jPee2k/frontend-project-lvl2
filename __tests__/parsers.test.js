@@ -6,7 +6,7 @@ import { getFileContent } from '../src/lib.js';
 const pathToFiles = path.resolve(process.cwd(), '__tests__/__fixtures__');
 const filepathToJson = path.resolve(pathToFiles, 'json/file1.json');
 const filepathToYaml = path.resolve(pathToFiles, 'yaml/file2.yaml');
-const filepathToTxt = path.resolve(pathToFiles, 'result/nested.txt');
+const filepathToTxt = path.resolve(pathToFiles, 'result/stylish.txt');
 
 let parser;
 
