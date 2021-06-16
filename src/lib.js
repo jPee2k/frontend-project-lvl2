@@ -12,14 +12,8 @@ export const info = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../packa
 export const getFileContent = (filepath) => {
   const fullPath = path.resolve(process.cwd(), filepath);
 
-  try {
-    const resource = fs.readFileSync(fullPath, 'utf8');
-    return resource.toString();
-  } catch (error) {
-    console.log(error);
-  }
-
-  throw new Error('file missing');
+  const resource = fs.readFileSync(fullPath, 'utf8');
+  return resource.toString();
 };
 
 export const getData = (filepath) => parseContent(filepath, getFileContent(filepath));

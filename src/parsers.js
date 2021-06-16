@@ -16,12 +16,5 @@ export const getCurrentParser = (filepath) => {
 
 export const parseContent = (filepath, content) => {
   const parse = getCurrentParser(filepath);
-
-  try {
-    return parse ? parse(content) : {};
-  } catch (error) {
-    console.log(error);
-  }
-
-  throw new Error('parser crushed');
+  return parse ? parse(content) : {};
 };

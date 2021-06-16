@@ -12,7 +12,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format', 'stylish')
   .action((filepath1, filepath2, type) => {
-    console.log(compareData(filepath1, filepath2, type));
+    console.log(`\n${compareData(filepath1, filepath2, type)}`);
   });
 
 program.parse();

@@ -1,12 +1,17 @@
-import path from 'path';
 import yaml from 'js-yaml';
+import getFixturePath from './index.test.js';
 import { getCurrentParser, parseContent } from '../src/parsers.js';
 import { getFileContent } from '../src/lib.js';
 
-const pathToFiles = path.resolve(process.cwd(), '__tests__/__fixtures__');
-const filepathToJson = path.resolve(pathToFiles, 'json/file1.json');
-const filepathToYaml = path.resolve(pathToFiles, 'yaml/file2.yaml');
-const filepathToTxt = path.resolve(pathToFiles, 'result/stylish.txt');
+let filepathToJson;
+let filepathToYaml;
+let filepathToTxt;
+
+beforeAll(() => {
+  filepathToJson = getFixturePath('file1.json');
+  filepathToYaml = getFixturePath('file2.yaml');
+  filepathToTxt = getFixturePath('stylish.txt');
+});
 
 let parser;
 

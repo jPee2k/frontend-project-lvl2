@@ -5,7 +5,8 @@ const hasChildren = (item) => _.isArray(item?.value);
 const getTextByType = (item, key) => {
   if (_.isString(item[key])) {
     return `'${item[key]}'`;
-  } if (_.isObject(item[key])) {
+  }
+  if (_.isObject(item[key])) {
     return '[complex value]';
   }
 
@@ -20,37 +21,26 @@ const getPath = (item, ancestor) => {
 };
 
 const makePlain = (data) => {
-  if (data.length === 0) {
-    return '';
-  }
+  const iter = (coll, ancestor = '') => coll
+    .filter((item) => item.prefix !== ' ')
+    .map((item) => {
+      if (hasChildren(item)) {
+        return iter(item.value, getPath(item, ancestor));
+      }
 
-  const iter = (coll, ancestor = '') => {
-    const items = coll
-      .filter((item) => item.prefix !== ' ')
-      .map((item) => {
-        if (hasChildren(item)) {
-          return iter(item.value, getPath(item, ancestor));
-        }
-
-        let result;
-        switch (item.prefix) {
-          case '-':
-            result = `Property '${getPath(item, ancestor)}' was removed`;
-            break;
-          case '+':
-            result = `Property '${getPath(item, ancestor)}' was added with value: ${getTextByType(item, 'value')}`;
-            break;
-          case '!':
-            result = `Property '${getPath(item, ancestor)}' was updated. From ${getTextByType(item, 'removedValue')} to ${getTextByType(item, 'addedValue')}`;
-            break;
-          default:
-            break;
-        }
-        return result;
-      });
-    return items.join('\n');
-  };
-  return `\n${iter(data)}`;
+      switch (item.prefix) {
+        case '-':
+          return `Property '${getPath(item, ancestor)}' was removed`;
+        case '+':
+          return `Property '${getPath(item, ancestor)}' was added with value: ${getTextByType(item, 'value')}`;
+        case '!':
+          return `Property '${getPath(item, ancestor)}' was updated. From ${getTextByType(item, 'removedValue')} to ${getTextByType(item, 'addedValue')}`;
+        default:
+          return '';
+      }
+    })
+    .join('\n');
+  return `${iter(data)}`;
 };
 
 export default makePlain;

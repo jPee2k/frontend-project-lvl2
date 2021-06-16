@@ -21,10 +21,6 @@ const makeLines = (value, spaces = 0) => {
 };
 
 const makeStylish = (data) => {
-  if (data.length === 0) {
-    return '';
-  }
-
   const iter = (coll, spaces = 0) => {
     const items = coll.map((item) => {
       let result;
@@ -45,7 +41,7 @@ const makeStylish = (data) => {
     return generateResult(items, spaces);
   };
 
-  return `\n${iter(data)}`;
+  return `${iter(data)}`;
 };
 
 export default makeStylish;
