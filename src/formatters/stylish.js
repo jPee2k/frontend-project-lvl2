@@ -23,17 +23,15 @@ const makeLines = (value, spaces = 0) => {
 const makeStylish = (data) => {
   const iter = (coll, spaces = 0) => {
     const items = coll.map((item) => {
-      let result;
-
       if (item.prefix === '-' || item.prefix === '+' || item.prefix === ' ') {
-        result = `${addTabs(spaces)}  ${item.prefix} ${item.key}: ${makeLines(item.value, spaces + 1)}`;
+        return `${addTabs(spaces)}  ${item.prefix} ${item.key}: ${makeLines(item.value, spaces + 1)}`;
       } if (item.prefix === '!') {
-        result = `${addTabs(spaces)}  - ${item.key}: ${makeLines(item.removedValue, spaces + 1)}\n${addTabs(spaces)}  + ${item.key}: ${makeLines(item.addedValue, spaces + 1)}`;
+        return `${addTabs(spaces)}  - ${item.key}: ${makeLines(item.removedValue, spaces + 1)}\n${addTabs(spaces)}  + ${item.key}: ${makeLines(item.addedValue, spaces + 1)}`;
       } if (item.prefix === '*') {
-        result = `${addTabs(spaces + 1)}${item.key}: ${iter(item.value, spaces + 1)}`;
+        return `${addTabs(spaces + 1)}${item.key}: ${iter(item.value, spaces + 1)}`;
       }
 
-      return result;
+      return '';
     });
 
     return generateResult(items, spaces);

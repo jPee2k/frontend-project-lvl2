@@ -1,36 +1,30 @@
 import yaml from 'js-yaml';
-import getFixturePath from './index.test.js';
+import { getFixturePath, getFileContent } from '../src/lib.js';
 import { getCurrentParser, parseContent } from '../src/parsers.js';
-import { getFileContent } from '../src/lib.js';
-
-const filepath = {};
-
-beforeAll(() => {
-  filepath.toJson = getFixturePath('file1.json');
-  filepath.toYaml = getFixturePath('file2.yaml');
-  filepath.toTxt = getFixturePath('stylish.txt');
-});
 
 test('parser by ext', () => {
-  const parser1 = getCurrentParser(filepath.toJson);
+  const filepathToJson = getFixturePath('file1.json');
+  const filepathToYaml = getFixturePath('file2.yaml');
+
+  const parser1 = getCurrentParser(filepathToJson);
   expect(parser1).toEqual(JSON.parse);
   expect(parser1).not.toEqual(yaml.safeLoad);
 
-  const parser2 = getCurrentParser(filepath.toYaml);
+  const parser2 = getCurrentParser(filepathToYaml);
   expect(parser2).toEqual(yaml.safeLoad);
 });
 
 test('parse data', () => {
-  const content1 = getFileContent(filepath.toJson);
-  expect(parseContent(filepath.toJson, content1)).toEqual(JSON.parse(content1));
+  const filepathToJson = getFixturePath('file1.json');
+  const filepathToYaml = getFixturePath('file2.yaml');
+  const filepathToTxt = getFixturePath('stylish.txt');
 
-  const content2 = getFileContent(filepath.toYaml);
-  expect(parseContent(filepath.toYaml, content2)).toEqual(yaml.safeLoad(content2));
+  const content1 = getFileContent(filepathToJson);
+  expect(parseContent(filepathToJson, content1)).toEqual(JSON.parse(content1));
 
-  const content3 = getFileContent(filepath.toTxt);
-  try {
-    parseContent(filepath.toTxt, content3);
-  } catch (e) {
-    expect(e.message).toBeTruthy();
-  }
+  const content2 = getFileContent(filepathToYaml);
+  expect(parseContent(filepathToYaml, content2)).toEqual(yaml.safeLoad(content2));
+
+  const content3 = getFileContent(filepathToTxt);
+  expect(() => parseContent(filepathToTxt, content3)).toThrow();
 });

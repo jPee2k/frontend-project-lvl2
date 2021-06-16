@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import _ from 'lodash';
+import { readFileSync } from 'fs';
 import { parseContent } from './parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -47,4 +48,11 @@ export const calculateDiff = (data1, data2) => {
   });
 
   return _.sortBy(result, (item) => item.key);
+};
+
+export const getFixturePath = (filename) => path.resolve(process.cwd(), '__tests__/__fixtures__', filename);
+
+export const getResult = (filename) => {
+  const resultPath = getFixturePath(filename);
+  return readFileSync(resultPath, 'utf-8');
 };
