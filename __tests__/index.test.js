@@ -8,32 +8,32 @@ const getResult = (filename) => {
   return readFileSync(resultPath, 'utf-8');
 };
 
-let fileJson1; let fileJson2; let fileYaml1; let fileYaml2;
+const files = {};
 
 beforeAll(() => {
-  fileJson1 = getFixturePath('file1.json');
-  fileJson2 = getFixturePath('file2.json');
-  fileYaml1 = getFixturePath('file1.yaml');
-  fileYaml2 = getFixturePath('file2.yaml');
+  files.json1 = getFixturePath('file1.json');
+  files.json2 = getFixturePath('file2.json');
+  files.yaml1 = getFixturePath('file1.yaml');
+  files.yaml2 = getFixturePath('file2.yaml');
 });
 
 test('gendiff Stylish', () => {
   const result = getResult('stylish.txt');
 
-  expect(compareData(fileJson1, fileJson2)).toEqual(result);
-  expect(compareData(fileJson1, fileYaml2, 'stylish')).toEqual(result);
-  expect(compareData(fileYaml1, fileYaml2, 'plain')).not.toEqual(result);
+  expect(compareData(files.json1, files.json2)).toEqual(result);
+  expect(compareData(files.json1, files.yaml2, 'stylish')).toEqual(result);
+  expect(compareData(files.yaml1, files.yaml2, 'plain')).not.toEqual(result);
 });
 
 test('gendiff Plain', () => {
   const result = getResult('plain.txt');
 
-  expect(compareData(fileYaml1, fileJson2, 'plain')).toEqual(result);
-  expect(compareData(fileJson1, fileYaml2, 'plain')).toEqual(result);
+  expect(compareData(files.yaml1, files.json2, 'plain')).toEqual(result);
+  expect(compareData(files.json1, files.yaml2, 'plain')).toEqual(result);
 });
 
 test('gendiff Json', () => {
-  expect(compareData(fileJson1, fileYaml2, 'json')).toEqual(getResult('json.txt'));
+  expect(compareData(files.json1, files.yaml2, 'json')).toEqual(getResult('json.txt'));
 });
 
 export default getFixturePath;

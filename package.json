@@ -1,6 +1,6 @@
 {
   "name": "@hexlet/code",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Compares two configuration files and shows a difference.",
   "main": "src/index.js",
   "type": "module",

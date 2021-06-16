@@ -3,20 +3,14 @@ import makePlain from './plain.js';
 import makeJson from './json.js';
 
 const chooseFormatter = (format) => {
-  let generateResult;
-
   switch (format) {
     case 'plain':
-      generateResult = makePlain;
-      break;
+      return makePlain;
     case 'json':
-      generateResult = makeJson;
-      break;
+      return makeJson;
     default:
-      generateResult = makeStylish;
+      return makeStylish;
   }
-
-  return generateResult;
 };
 
 export default chooseFormatter;
