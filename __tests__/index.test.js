@@ -21,19 +21,19 @@ test('gendiff Stylish', () => {
   const result = getResult('stylish.txt');
 
   expect(compareData(fileJson1, fileJson2)).toEqual(result);
-  expect(compareData(fileJson1, fileYaml2, { format: 'stylish' })).toEqual(result);
-  expect(compareData(fileYaml1, fileYaml2, { format: 'plain' })).not.toEqual(result);
+  expect(compareData(fileJson1, fileYaml2, 'stylish')).toEqual(result);
+  expect(compareData(fileYaml1, fileYaml2, 'plain')).not.toEqual(result);
 });
 
 test('gendiff Plain', () => {
   const result = getResult('plain.txt');
 
-  expect(compareData(fileYaml1, fileJson2, { format: 'plain' })).toEqual(result);
-  expect(compareData(fileJson1, fileYaml2, { format: 'plain' })).toEqual(result);
+  expect(compareData(fileYaml1, fileJson2, 'plain')).toEqual(result);
+  expect(compareData(fileJson1, fileYaml2, 'plain')).toEqual(result);
 });
 
 test('gendiff Json', () => {
-  expect(compareData(fileJson1, fileYaml2, { format: 'json' })).toEqual(getResult('json.txt'));
+  expect(compareData(fileJson1, fileYaml2, 'json')).toEqual(getResult('json.txt'));
 });
 
 export default getFixturePath;

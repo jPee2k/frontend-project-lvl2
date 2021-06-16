@@ -2,7 +2,7 @@ import makeStylish from './stylish.js';
 import makePlain from './plain.js';
 import makeJson from './json.js';
 
-const chooseFormatter = ({ format }) => {
+const chooseFormatter = (format) => {
   let generateResult;
 
   switch (format) {
