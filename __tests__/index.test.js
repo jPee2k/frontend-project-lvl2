@@ -3,6 +3,10 @@ import { readFileSync } from 'fs';
 import compareData from '../src/index.js';
 
 const getFixturePath = (filename) => path.resolve(process.cwd(), '__tests__/__fixtures__', filename);
+const getResult = (filename) => {
+  const resultPath = getFixturePath(filename);
+  return readFileSync(resultPath, 'utf-8');
+};
 
 let fileJson1; let fileJson2; let fileYaml1; let fileYaml2;
 
@@ -14,26 +18,22 @@ beforeAll(() => {
 });
 
 test('gendiff Stylish', () => {
-  const correctResultPath1 = getFixturePath('stylish.txt');
-  const result1 = readFileSync(correctResultPath1, 'utf-8');
+  const result = getResult('stylish.txt');
 
-  expect(compareData(fileJson1, fileJson2, { format: 'stylish' })).toEqual(result1);
-  expect(compareData(fileYaml1, fileYaml2, { format: 'stylish' })).toEqual(result1);
+  expect(compareData(fileJson1, fileJson2)).toEqual(result);
+  expect(compareData(fileJson1, fileYaml2, { format: 'stylish' })).toEqual(result);
+  expect(compareData(fileYaml1, fileYaml2, { format: 'plain' })).not.toEqual(result);
 });
 
 test('gendiff Plain', () => {
-  const correctResultPath2 = getFixturePath('plain.txt');
-  const result2 = readFileSync(correctResultPath2, 'utf-8');
+  const result = getResult('plain.txt');
 
-  expect(compareData(fileYaml1, fileJson2, { format: 'plain' })).toEqual(result2);
-  expect(compareData(fileJson1, fileYaml2, { format: 'plain' })).toEqual(result2);
+  expect(compareData(fileYaml1, fileJson2, { format: 'plain' })).toEqual(result);
+  expect(compareData(fileJson1, fileYaml2, { format: 'plain' })).toEqual(result);
 });
 
 test('gendiff Json', () => {
-  const correctResultPath3 = getFixturePath('json.txt');
-  const result3 = readFileSync(correctResultPath3, 'utf-8');
-
-  expect(compareData(fileJson1, fileYaml2, { format: 'json' })).toEqual(result3);
+  expect(compareData(fileJson1, fileYaml2, { format: 'json' })).toEqual(getResult('json.txt'));
 });
 
 export default getFixturePath;
