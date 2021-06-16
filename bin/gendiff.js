@@ -15,4 +15,4 @@ program
     console.log(`\n${compareData(filepath1, filepath2, type)}`);
   });
 
-program.parse();
+program.parse(process.argv);
