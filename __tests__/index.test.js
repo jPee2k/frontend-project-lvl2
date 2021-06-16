@@ -4,32 +4,36 @@ import compareData from '../src/index.js';
 
 const getFixturePath = (filename) => path.resolve(process.cwd(), '__tests__/__fixtures__', filename);
 
-test('gendiff --format stylish', () => {
-  const correctResultPath = getFixturePath('stylish.txt');
-  const result = readFileSync(correctResultPath, 'utf-8');
+let fileJson1; let fileJson2; let fileYaml1; let fileYaml2;
 
-  const fileJson = getFixturePath('file1.json');
-  const fileYaml = getFixturePath('file2.yaml');
-  expect(compareData(fileJson, fileYaml, { format: 'stylish' })).toEqual(result);
+beforeAll(() => {
+  fileJson1 = getFixturePath('file1.json');
+  fileJson2 = getFixturePath('file2.json');
+  fileYaml1 = getFixturePath('file1.yaml');
+  fileYaml2 = getFixturePath('file2.yaml');
+});
+
+test('gendiff --format stylish', () => {
+  const correctResultPath1 = getFixturePath('stylish.txt');
+  const result1 = readFileSync(correctResultPath1, 'utf-8');
+
+  expect(compareData(fileJson1, fileJson2, { format: 'stylish' })).toEqual(result1);
+  expect(compareData(fileYaml1, fileYaml2, { format: 'stylish' })).toEqual(result1);
 });
 
 test('gendiff --format plain', () => {
-  const correctResultPath = getFixturePath('plain.txt');
-  const result = readFileSync(correctResultPath, 'utf-8');
+  const correctResultPath2 = getFixturePath('plain.txt');
+  const result2 = readFileSync(correctResultPath2, 'utf-8');
 
-  const fileYaml = getFixturePath('file1.yaml');
-  const fileJson = getFixturePath('file2.json');
-  expect(compareData(fileYaml, fileJson, { format: 'plain' })).toEqual(result);
+  expect(compareData(fileYaml1, fileJson2, { format: 'plain' })).toEqual(result2);
+  expect(compareData(fileJson1, fileYaml2, { format: 'plain' })).toEqual(result2);
 });
 
 test('gendiff --format json', () => {
-  const correctResultPath = getFixturePath('json.txt');
-  const result = readFileSync(correctResultPath, 'utf-8');
-  console.log(result);
+  const correctResultPath3 = getFixturePath('json.txt');
+  const result3 = readFileSync(correctResultPath3, 'utf-8');
 
-  const fileYaml1 = getFixturePath('file1.yaml');
-  const fileYaml2 = getFixturePath('file2.yaml');
-  expect(compareData(fileYaml1, fileYaml2, { format: 'json' })).toEqual(result);
+  expect(compareData(fileJson1, fileYaml2, { format: 'json' })).toEqual(result3);
 });
 
 export default getFixturePath;

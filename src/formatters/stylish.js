@@ -28,9 +28,7 @@ const makeStylish = (data) => {
       if (item.prefix === '-' || item.prefix === '+' || item.prefix === ' ') {
         result = `${addTabs(spaces)}  ${item.prefix} ${item.key}: ${makeLines(item.value, spaces + 1)}`;
       } if (item.prefix === '!') {
-        const removed = `${addTabs(spaces)}  - ${item.key}: ${makeLines(item.removedValue, spaces + 1)}`;
-        const added = `${addTabs(spaces)}  + ${item.key}: ${makeLines(item.addedValue, spaces + 1)}`;
-        result = `${removed}\n${added}`;
+        result = `${addTabs(spaces)}  - ${item.key}: ${makeLines(item.removedValue, spaces + 1)}\n${addTabs(spaces)}  + ${item.key}: ${makeLines(item.addedValue, spaces + 1)}`;
       } if (item.prefix === '*') {
         result = `${addTabs(spaces + 1)}${item.key}: ${iter(item.value, spaces + 1)}`;
       }
