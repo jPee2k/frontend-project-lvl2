@@ -13,7 +13,7 @@ beforeAll(() => {
   fileYaml2 = getFixturePath('file2.yaml');
 });
 
-test('gendiff --format stylish', () => {
+test('gendiff Stylish', () => {
   const correctResultPath1 = getFixturePath('stylish.txt');
   const result1 = readFileSync(correctResultPath1, 'utf-8');
 
@@ -21,7 +21,7 @@ test('gendiff --format stylish', () => {
   expect(compareData(fileYaml1, fileYaml2, { format: 'stylish' })).toEqual(result1);
 });
 
-test('gendiff --format plain', () => {
+test('gendiff Plain', () => {
   const correctResultPath2 = getFixturePath('plain.txt');
   const result2 = readFileSync(correctResultPath2, 'utf-8');
 
@@ -29,7 +29,7 @@ test('gendiff --format plain', () => {
   expect(compareData(fileJson1, fileYaml2, { format: 'plain' })).toEqual(result2);
 });
 
-test('gendiff --format json', () => {
+test('gendiff Json', () => {
   const correctResultPath3 = getFixturePath('json.txt');
   const result3 = readFileSync(correctResultPath3, 'utf-8');
 
