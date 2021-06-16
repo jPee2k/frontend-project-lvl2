@@ -5,7 +5,7 @@ reinstall:
 	npm ci
 
 test:
-	npm test
+	npm run test-windows
 
 test-watch:
 	npm test -- --watch
